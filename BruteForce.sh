@@ -14,11 +14,18 @@ cat cleanlist.txt
 
 while read -r key value;do
     tshark -r "$in_pcap" -T fields -e frame.time 'ip.src== '$key' and tcp.dstport== '$value'' > $key.$value.txt
-    Epoch_Time = date -f $key.$value.txt +%s | sort
-    Difference = (head -n1 $Epoch_Time) - (tail -n1 $Epoch_Time)
-    echo $Difference
+    awk '{ total += $4 } END { print total/NR }' $key.$value.txt > mean.txt
+    cat mean.txt
+    #sort $key.$value.txt | awk '{print $2, $3}' > trimmed.txt | head -n1 - tail -n1
+    #Difference= $Headder - $Footer
+    #echo $Difference
     rm $key.$value.txt
+    rm mean.txt
 done < cleanlist.txt
+
+rm output.txt
+rm topips.txt
+rm cleanlist.txt
 #declare -A dict
 
 #echo ${dict[@]}
@@ -27,9 +34,7 @@ done < cleanlist.txt
 #for i in $(cut -d, -f2 topips.txt);do 
    #echo $i;  done
 
-rm output.txt
-rm topips.txt
-rm cleanlist.txt
+
 
 
 #tshark -r "$in_pcap" -T fields -e frame.time
