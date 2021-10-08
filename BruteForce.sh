@@ -8,15 +8,17 @@ tshark -r "$in_pcap" -T fields -e ip.src -e tcp.dstport | sort | uniq -c | sort 
 head output.txt | awk '{print $2, $3}' > topips.txt
 awk '!$2{next}1' topips.txt > cleanlist.txt
 
+head output.txt | awk '{print $1}' 
+
 echo 'Possible Brute Force Attackers: '
 cat cleanlist.txt
 #Sep  6, 2019 14:46:30.003887000 EDT
 while read -r key value;do
     tshark -r "$in_pcap" -T fields -e frame.time_epoch 'ip.src== '$key' and tcp.dstport== '$value'' | sort -n > $key.$value.txt
     #date -d $key.$value.txt '+%b +%d, +%Y +%T.+%N +%Z' > mean.txt 
-    hd= head -n1 $key.$value.txt
-    tl= tail -n1 $key.$value.txt
-    echo $tl - $hd
+    hd=$(head -n1 $key.$value.txt)
+    tl=$(tail -n1 $key.$value.txt)
+    awk '{print $1-$2}' <<< "$tl $hd"
     rm $key.$value.txt
 done < cleanlist.txt
 
