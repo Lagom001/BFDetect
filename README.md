@@ -1,5 +1,5 @@
 # BFDetect
-Uses tshark to filter pcap's in order to analyze if there has been a brute force attack. The program tells the user what the top IP addresses are, what ports they are hitting and in how many seconds.  This allows the user to focus on specific data when analyzing large pcaps.
+BFDetect uses tshark to filter pcap's in order to analyze if there has been a brute force attack. The program tells the user what the top IP addresses are, what ports they are hitting and in how many seconds.  This allows the user to focus on specific data when analyzing large pcaps.
 
 ---
 ## How to run BFDetect
