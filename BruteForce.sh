@@ -57,12 +57,15 @@ else
         #Grab the first and last time counts
         hd=$(head -n1 $key.$value.txt)
         tl=$(tail -n1 $key.$value.txt)
+        #Create integer variables for threshhold
         declare -i amount=$(head -n $dev output.txt | tail -n +$dev | awk '{print $1}')
         seconds=$( awk '{print $1-$2}' <<< "$tl $hd" )
         declare -i int=${seconds%.*}
+        remainder=$(( amount / int ))
+        declare -i remain=${remainder%.*}
         #echo $int
         #create threshhold
-        if [ "$amount" -ge 50 ] && [ "$int" -le 60 ]
+        if [ "$amount" -ge 50 ] && [ "$remain" -le 20 ]
         then
         #Print the dialogue of ip, port, and subtraction of time 
             (echo -n 'IP address ' && head -n $dev cleanlist.txt | tail -n +$dev | awk '{print $1}' | tr "\n" " " && echo -n 'hit port number ' && head -n $dev cleanlist.txt | tail -n +$dev | awk '{print $2}' | tr "\n" " " &&  head -n $dev output.txt | tail -n +$dev | awk '{print $1}' | tr "\n" " " && echo -n 'times in ' && awk '{print $1-$2}' <<< "$tl $hd" | tr "\n" " " && echo 'seconds')
