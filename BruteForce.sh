@@ -57,11 +57,22 @@ else
         #Grab the first and last time counts
         hd=$(head -n1 $key.$value.txt)
         tl=$(tail -n1 $key.$value.txt)
+        declare -i amount=$(head -n $dev output.txt | tail -n +$dev | awk '{print $1}')
+        #declare -i seconds=$( awk '{print $1-$2}' <<< "$tl $hd" )
+        #echo $seconds
+        #echo $amount
+        #create threshhold
+        if [ "$amount" -ge 50 ]
+        then
         #Print the dialogue of ip, port, and subtraction of time 
-        (echo -n 'IP address ' && head -n $dev cleanlist.txt | tail -n +$dev | awk '{print $1}' | tr "\n" " " && echo -n 'hit port number ' && head -n $dev cleanlist.txt | tail -n +$dev | awk '{print $2}' | tr "\n" " " &&  head -n $dev output.txt | tail -n +$dev | awk '{print $1}' | tr "\n" " " && echo -n 'times in ' && awk '{print $1-$2}' <<< "$tl $hd" | tr "\n" " " && echo 'seconds')
-        #Increase count
-        dev=$((dev+1))
-        rm $key.$value.txt
+            (echo -n 'IP address ' && head -n $dev cleanlist.txt | tail -n +$dev | awk '{print $1}' | tr "\n" " " && echo -n 'hit port number ' && head -n $dev cleanlist.txt | tail -n +$dev | awk '{print $2}' | tr "\n" " " &&  head -n $dev output.txt | tail -n +$dev | awk '{print $1}' | tr "\n" " " && echo -n 'times in ' && awk '{print $1-$2}' <<< "$tl $hd" | tr "\n" " " && echo 'seconds')
+            #Increase count
+            dev=$((dev+1))
+            rm $key.$value.txt
+        else
+            dev=$((dev+1))
+            rm $key.$value.txt
+        fi
     done < cleanlist.txt
 
     #Remove files created
