@@ -29,7 +29,7 @@ then
         remainder=$(( amount / int ))
         declare -i remain=${remainder%.*}
         #Create threshhold
-        if [ "$amount" -ge 50 ] && [ "$remain" -le 20 ]
+        if [ "$amount" -ge 50 ] && [ "$remain" -ge 20 ]
         then
         #Print the dialogue of ip, port, and subtraction of time 
             (echo -n 'IP address ' && head -n $dev cleanlist.txt | tail -n +$dev | awk '{print $1}' | tr "\n" " " && echo -n 'hit port number ' && head -n $dev cleanlist.txt | tail -n +$dev | awk '{print $2}' | tr "\n" " " &&  head -n $dev output.txt | tail -n +$dev | awk '{print $1}' | tr "\n" " " && echo -n 'times in ' && awk '{print $1-$2}' <<< "$tl $hd" | tr "\n" " " && echo 'seconds')
@@ -77,7 +77,7 @@ else
         remainder=$(( amount / int ))
         declare -i remain=${remainder%.*}
         #Create threshhold
-        if [ "$amount" -ge 50 ] && [ "$remain" -le 20 ]
+        if [ "$amount" -ge 50 ] && [ "$remain" -ge 20 ]
         then
         #Print the dialogue of ip, port, and subtraction of time 
             (echo -n 'IP address ' && head -n $dev cleanlist.txt | tail -n +$dev | awk '{print $1}' | tr "\n" " " && echo -n 'hit port number ' && head -n $dev cleanlist.txt | tail -n +$dev | awk '{print $2}' | tr "\n" " " &&  head -n $dev output.txt | tail -n +$dev | awk '{print $1}' | tr "\n" " " && echo -n 'times in ' && awk '{print $1-$2}' <<< "$tl $hd" | tr "\n" " " && echo 'seconds')
