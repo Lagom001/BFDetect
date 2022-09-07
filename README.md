@@ -3,8 +3,8 @@ BFDetect uses tshark to filter pcap's in order to analyze if there has been a br
 
 ---
 ## How to run BFDetect
-After downloading the package, run the executable BruteForce.sh.  The program will then ask for a pcap file to open.  Be sure to input the absolute path of the file.
+After downloading the package, run the executable BruteForce.sh. The program will then ask for a pcap file to open.  Be sure to input the absolute path of the file.
 
 The program will then output the top potential malicious IPs. 
 
-<img width="545" alt="Screen Shot 2021-12-13 at 2 45 58 PM" src="https://user-images.githubusercontent.com/78869645/145901782-5dab72b2-82dd-458e-a9e9-fc0733f40907.png">
+<img width="639" alt="Screen Shot 2022-09-07 at 11 56 10 AM" src="https://user-images.githubusercontent.com/78869645/188957223-25c89fca-ecc9-45f5-a582-74a318408731.png">
